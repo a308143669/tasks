@@ -15,15 +15,12 @@ public class VipUsersAction extends ActionSupport {
 	private String message;
 	private Integer status;
 	
-	public String listAll(){
+	/**
+	 * 显示商品列表
+	 */
+	@Override
+	public String execute() {
 		return "listAll";
-	}
-	
-	public String getUpOrDnAll() {
-		if (status == null)
-			status = 0;
-		vipUsersList = vipUsersDao.getUpOrDnAll(status);
-		return listAll();
 	}
 	
 	/**
@@ -33,6 +30,20 @@ public class VipUsersAction extends ActionSupport {
 		return "add";
 	}
 	
+	/**
+	 * 获取上架 或者下架 的列表
+	 */
+	public String getUpOrDnAll() {
+		if (status == null)
+			status = 0;
+		vipUsersList = vipUsersDao.getUpOrDnAll(status);
+		return execute();
+	}
+	
+	
+	/**
+	 * 录入商品信息
+	 */
 	public String insert() {
 		boolean bl = vipUsersDao.insertVipUsers(vipUsers);
 		if(bl)
@@ -42,14 +53,17 @@ public class VipUsersAction extends ActionSupport {
 		return "add";
 	}
 
-	
-	
-	
+	/**
+	 *  更新上下架 的状态
+	 */
 	public String update(){
+		status = vipUsers.getStatus();
+		
 		if (vipUsers.getStatus() == 0)
 			vipUsers.setStatus(1);
 		else
 			vipUsers.setStatus(0);
+		
 		vipUsersDao.updateVipUsers(vipUsers);
 		
 		return getUpOrDnAll();

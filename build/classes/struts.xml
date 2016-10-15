@@ -10,6 +10,7 @@
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 
 
+	
 	<!-- 第一个模块，登陆注册 -->
 	<package name="login" namespace="/login" extends="struts-default">
 		<!-- 注册拦截器 -->
@@ -83,10 +84,10 @@
 	<package name="product" namespace="/product" extends="struts-default">
 		<!-- 大家自行实现 -->
 		<action name="*" class="com.s126.demo.action.VipUsersAction" method="{1}">
+		    
 		    <result name="listAll">/WEB-INF/jsp/product/listAll.jsp</result>
 		    <result name="add">/WEB-INF/jsp/product/add.jsp</result>
 		</action>
-		
 	</package>
 
 

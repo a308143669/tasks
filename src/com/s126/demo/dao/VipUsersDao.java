@@ -65,6 +65,11 @@ public class VipUsersDao {
 			
 			con.commit();
 		} catch (SQLException e) {
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		} finally {
 			DBUtil.closeAll(null, ps, con);
